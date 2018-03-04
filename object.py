@@ -28,11 +28,6 @@ class Human():
             self.generation = 0
             if gender is not None:
                 self.genes[22][1] = self.genes[22][1] & (~0 << 1) | gender
-#                self.genes[22][1] = self.genes[22][1] & gender
-#                if gender == MALE:
-#                    self.genes[22][1] = self.genes[22][1] | 1
-#                else:
-#                    self.genes[22][1] = self.genes[22][1] & (~0 << 1)
         else:
             if mother.generation > father.generation:
                 self.generation = mother.generation + 1
@@ -42,11 +37,6 @@ class Human():
                 self.genes[pair] = [mother.genes[pair][coinflip()], father.genes[pair][coinflip()]]
             if gender is not None:
                 self.genes[22][1] = father.genes[22][gender]
-#                    if father.genes[22][0] & gender:
-#                        self.genes[22][1] = father.genes[22][0]
-#                    else if father.genes[22][1] & gender:
-#                        self.genes[22][1] = 
-                        
             self.father = father.id
             self.mother = mother.id
             father.children.append(self.id)
