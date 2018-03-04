@@ -7,6 +7,9 @@ MALE = 1
 
 def coinflip():
     return random.randint(0, 1)
+
+def makechromo():
+    return random.getrandbits(64)
 	
 class Human():
     id = None
@@ -23,7 +26,7 @@ class Human():
         self.children = []
         if father is None and mother is None:
             for pair in range(0, 23):
-                self.genes[pair] = [int(uuid.uuid4()), int(uuid.uuid4())]
+                self.genes[pair] = [makechromo(), makechromo()]
             self.genes[22][0] = self.genes[22][0] & (~0 << 1)
             self.generation = 0
             if gender is not None:
