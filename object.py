@@ -27,10 +27,10 @@ class Human():
         if father is None and mother is None:
             for pair in range(0, 23):
                 self.genes[pair] = [makechromo(), makechromo()]
-            self.genes[22][0] = self.genes[22][0] & (~0 << 1)
+            self.genes[22][0] &= (~0 << 1)
             self.generation = 0
             if gender is not None:
-                self.genes[22][1] = self.genes[22][1] & (~0 << 1) | gender
+                self.genes[22][1] &= (~0 << 1) | gender
         else:
             if mother.generation > father.generation:
                 self.generation = mother.generation + 1
@@ -47,7 +47,9 @@ class Human():
         self.setgender()
 
     def setgender(self):
-        if (self.genes[22][0] & 1) | (self.genes[22][1] & 1):
+        if self.genes[22][0] & 1:
+            raise RuntimeError("Extraenous Y chromosome found.")
+        if self.genes[22][1] & 1:
             self.gender = MALE
         else:
             self.gender = FEMALE
