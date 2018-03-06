@@ -21,7 +21,7 @@ while generation < gens:
             father = men[random.randint(0, len(men)-1)]
         if father.mother == mother.mother:
             father = men[random.randint(0, len(men)-1)]
-        for i in range(0, random.randint(1, 3)):
+        for i in range(0, random.randint(0, 4)):
             child = object.Human(mother, father)
             if child.gender == object.MALE:
                 boys += [child]

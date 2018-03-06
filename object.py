@@ -46,6 +46,9 @@ class Human():
             mother.children.append(self.id)
         self.setgender()
 
+    def die(self):
+        del self.genes
+
     def setgender(self):
         if self.genes[22][0] & 1:
             raise RuntimeError("Extraenous Y chromosome found.")
