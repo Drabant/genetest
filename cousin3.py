@@ -2,21 +2,19 @@ from object import Human, MALE, FEMALE
 import sys
 import time
 
-runs = 1000
+runs = 10000
 
 inbred = {}
 
+g00 = Human(gender=MALE)
+g01 = Human(gender=FEMALE)
 for i in range(runs):
-    sys.stdout.write("Running simulation... %d%%\r" % (i * 100 / runs))
+    sys.stdout.write("Running simulation... %d%%\r" % ((i+1) * 100 / runs))
     sys.stdout.flush()
-    g00 = Human(gender=MALE)
-    g01 = Human(gender=FEMALE)
     g10 = Human(g01, g00, gender=FEMALE)
     g11 = Human(g01, g00, gender=FEMALE)
-    g12 = Human(gender=MALE)
-    g13 = Human(gender=FEMALE)
-    g20 = Human(g10, g12, gender=FEMALE)
-    g21 = Human(g11, g13, gender=FEMALE)
+    g20 = Human(g10, Human(gender=MALE), gender=FEMALE)
+    g21 = Human(g11, Human(gender=MALE), gender=FEMALE)
     g30 = Human(g20, Human(gender=MALE), gender=FEMALE)
     g31 = Human(g21, Human(gender=MALE), gender=FEMALE)
     g40 = Human(g30, Human(gender=MALE), gender=MALE)
