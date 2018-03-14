@@ -10,7 +10,7 @@ def coinflip():
 
 def makechromo():
     return random.getrandbits(64)
-	
+
 class Human():
     id = None
     father = None
@@ -30,7 +30,7 @@ class Human():
             self.genes[22][0] &= (~0 << 1)
             self.generation = 0
             if gender is not None:
-                self.genes[22][1] &= (~0 << 1) | gender
+                self.genes[22][1] = (self.genes[22][1] & (~0 << 1)) | gender
         else:
             if mother.generation > father.generation:
                 self.generation = mother.generation + 1
