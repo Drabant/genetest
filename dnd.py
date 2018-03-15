@@ -9,8 +9,8 @@ class Character(object.Human):
     a_wis = None
     a_cha = None
 
-    def __init__(self, *argv):
-        super(Character, self).__init__(*argv)
+    def __init__(self, **kwargs):
+        super(Character, self).__init__(**kwargs)
         self.__calcabilities()
 
     def getgene(self, pair, offset, length):
