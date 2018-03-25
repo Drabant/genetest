@@ -11,10 +11,6 @@ def coinflip():
 def makechromo():
     return random.getrandbits(64)
 
-def qzip(first, second):
-    while True:
-        yield (next(first), next(second))
-
 class Human():
     id = None
     father = None
@@ -31,10 +27,10 @@ class Human():
         if father is None and mother is None:
             for pair in range(0, 23):
                 self.genes[pair] = [makechromo(), makechromo()]
-            self.genes[22][0] = self.genes[22][0] & (~0 << 1)
+            self.genes[22][0] &= (~0 << 1)
             self.generation = 0
             if gender is not None:
-                self.genes[22][1] = self.genes[22][1] & (~0 << 1) | gender
+                self.genes[22][1] = (self.genes[22][1] & (~0 << 1)) | gender
         else:
             if mother.generation > father.generation:
                 self.generation = mother.generation + 1
@@ -54,8 +50,13 @@ class Human():
         for i in self.genes:
             yield i[coinflip()]
             
+    def die(self):
+        del self.genes
+
     def setgender(self):
-        if (self.genes[22][0] & 1) | (self.genes[22][1] & 1):
+        if self.genes[22][0] & 1:
+            raise RuntimeError("Extraenous Y chromosome found.")
+        if self.genes[22][1] & 1:
             self.gender = MALE
         else:
             self.gender = FEMALE
