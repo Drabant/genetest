@@ -10,7 +10,11 @@ def coinflip():
 
 def makechromo():
     return random.getrandbits(64)
-	
+
+def qzip(first, second):
+    while True:
+        yield (next(first), next(second))
+
 class Human():
     id = None
     father = None
@@ -46,6 +50,10 @@ class Human():
             mother.children.append(self.id)
         self.setgender()
 
+    def splice(self):
+        for i in self.genes:
+            yield i[coinflip()]
+            
     def setgender(self):
         if (self.genes[22][0] & 1) | (self.genes[22][1] & 1):
             self.gender = MALE
